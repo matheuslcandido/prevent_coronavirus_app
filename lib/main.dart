@@ -1,111 +1,195 @@
 import 'package:flutter/material.dart';
 
+import './prevention.dart';
+
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final preventions = const [
+    {
+      'group': 'Protect Yourself',
+      'title': 'Clean your hands often',
+      'descriptions': [
+        {
+          'text':
+              'Wash your hands often with soap and water for at least 20 seconds especially after you have been in a public place, or after blowing your nose, coughing, or sneezing.'
+        },
+        {
+          'text':
+              'If soap and water are not readily available, use a hand sanitizer that contains at least 60% alcohol. Cover all surfaces of your hands and rub them together until they feel dry.'
+        },
+        {
+          'text':
+              'Avoid touching your eyes, nose, and mouth with unwashed hands.'
+        },
+      ],
+      'imageUrl':
+          'https://www.cdc.gov/coronavirus/2019-ncov/images/protect-wash-hands.png',
+    },
+    {
+      'group': 'Protect Yourself',
+      'title': 'Avoid close contact',
+      'descriptions': [
+        {'text': 'Avoid close contact with people who are sick.'},
+        {
+          'text':
+              'Put distance between yourself and other people if COVID-19 is spreading in your community. This is especially important for people who are at higher risk of getting very sick.'
+        },
+      ],
+      'imageUrl':
+          'https://www.cdc.gov/coronavirus/2019-ncov/images/protect-quarantine.png',
+    },
+    {
+      'group': 'Protect Others',
+      'title': 'Stay home if you’re sick',
+      'descriptions': [
+        {
+          'text':
+              'Stay home if you are sick, except to get medical care. Learn what to do if you are sick.'
+        },
+      ],
+      'imageUrl':
+          'https://www.cdc.gov/coronavirus/2019-ncov/images/COVIDweb_02_bed.png',
+    },
+    {
+      'group': 'Protect Others',
+      'title': 'Cover coughs and sneezes',
+      'descriptions': [
+        {
+          'text':
+              'Cover your mouth and nose with a tissue when you cough or sneeze or use the inside of your elbow.'
+        },
+        {'text': 'Throw used tissues in the trash.'},
+        {
+          'text':
+              'Immediately wash your hands with soap and water for at least 20 seconds. If soap and water are not readily available, clean your hands with a hand sanitizer that contains at least 60% alcohol.'
+        },
+      ],
+      'imageUrl':
+          'https://www.cdc.gov/coronavirus/2019-ncov/images/COVIDweb_06_coverCough.png',
+    },
+    {
+      'group': 'Protect Others',
+      'title': 'Wear a facemask if you are sick',
+      'descriptions': [
+        {
+          'text':
+              'If you are sick: You should wear a facemask when you are around other people (e.g., sharing a room or vehicle) and before you enter a healthcare provider’s office. If you are not able to wear a facemask (for example, because it causes trouble breathing), then you should do your best to cover your coughs and sneezes, and people who are caring for you should wear a facemask if they enter your room. Learn what to do if you are sick.'
+        },
+        {
+          'text':
+              'If you are NOT sick: You do not need to wear a facemask unless you are caring for someone who is sick (and they are not able to wear a facemask). Facemasks may be in short supply and they should be saved for caregivers.'
+        },
+      ],
+      'imageUrl':
+          'https://www.cdc.gov/coronavirus/2019-ncov/images/COVIDweb_05_mask.png',
+    },
+    {
+      'group': 'Protect Others',
+      'title': 'Clean and disinfect',
+      'descriptions': [
+        {
+          'text':
+              'Clean AND disinfect frequently touched surfaces daily. This includes tables, doorknobs, light switches, countertops, handles, desks, phones, keyboards, toilets, faucets, and sinks.'
+        },
+        {
+          'text':
+              'If surfaces are dirty, clean them: Use detergent or soap and water prior to disinfection.'
+        },
+      ],
+      'imageUrl':
+          'https://www.cdc.gov/coronavirus/2019-ncov/images/COVIDweb_09_clean.png',
+    },
+  ];
+
+  var _indexPrevention = 0;
+
+  void _nextPrevention() {
+    if (_indexPrevention == preventions.length - 1) {
+      setState(() {
+        _indexPrevention = 0;
+      });
+    } else {
+      setState(() {
+        _indexPrevention = _indexPrevention + 1;
+      });
+    }
+  }
+
+  void _previousPrevention() {
+    if (_indexPrevention == 0) {
+      setState(() {
+        _indexPrevention = preventions.length - 1;
+      });
+    } else {
+      setState(() {
+        _indexPrevention = _indexPrevention - 1;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            preventions[_indexPrevention]['group'],
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Expanded(
+                flex: 15,
+                child: Prevention(
+                  preventions: preventions,
+                  indexPrevention: _indexPrevention,
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: RaisedButton(
+                          color: Colors.blue,
+                          textColor: Colors.white,
+                          child: Text('Previous'),
+                          onPressed: _previousPrevention,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: RaisedButton(
+                          color: Colors.blue,
+                          textColor: Colors.white,
+                          child: Text('Next'),
+                          onPressed: _nextPrevention,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
