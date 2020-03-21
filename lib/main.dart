@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './prevention.dart';
+import './preventionControler.dart';
 
 void main() => runApp(MyApp());
 
@@ -156,34 +157,9 @@ class _MyAppState extends State<MyApp> {
               ),
               Expanded(
                 flex: 1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 4),
-                        child: RaisedButton(
-                          color: Colors.blue,
-                          textColor: Colors.white,
-                          child: Text('Previous'),
-                          onPressed: _previousPrevention,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 4),
-                        child: RaisedButton(
-                          color: Colors.blue,
-                          textColor: Colors.white,
-                          child: Text('Next'),
-                          onPressed: _nextPrevention,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: PreventionControler(
+                  previousPrevention: _previousPrevention,
+                  nextPrevention: _nextPrevention,
                 ),
               ),
             ],
